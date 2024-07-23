@@ -1,0 +1,33 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#buttons{
+    margin-top: 6px;
+    margin-right: 7px;
+}
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+#form
+{
+    margin-left: 80px;
+    margin-top: 30px;
+}
+#nav-text{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+}
+#nav-margin{
+    margin-right: 600px;
+}
+.text{
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+#label{
+    background-color: yellowgreen;
+}

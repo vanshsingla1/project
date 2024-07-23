@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer-Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+    
+    </script>
+   <script>
+        var module=angular.module("mymodule",[]);
+        var controller=module.controller("mycontroller",function($scope,$http)
+    {
+      let active=localStorage.getItem("activeuser");
+      $scope.selemail=active;
+            $scope.jsonArrayCity;
+            $scope.jsonArrayAll;
+            $scope.jsonArrayName;
+            $scope.jsonArrayMoreinfo;
+            ////////////////////////////////////////////////////////////////////
+            $scope.doShowSel=function()
+                {
+                    
+                    let field=$scope.selfield;
+                    let url="/fetch-some-field?field="+field;
+
+                    $http.get(url).then(allIsWell,notWell);
+
+                    function allIsWell(response)
+                    {
+                        //alert(JSON.stringify(response.data)) ;
+                        $scope.jsonArrayCity=response.data;
+
+                    }
+                    function notWell(err)
+                    {
+                        alert(err)
+                    }
+                }
+                //////////////////////////////////////////////////////////////////////////
+                $scope.doShowSelAll=function()
+                {
+                    
+                    let city=$scope.selCity;
+                    let url="/fetch-all-details-selected-infl?city="+city;
+
+                    $http.get(url).then(allIsWell,notWell);
+
+                    function allIsWell(response)
+                    {
+                        //alert(JSON.stringify(response.data)) ;
+                        $scope.jsonArrayAll=response.data;
+
+                    }
+                    function notWell(err)
+                    {
+                        alert(err)
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////
+                $scope.doShowName=function()
+                {
+                    
+                    let name=$scope.name;
+                    let url="/fetch-some-name?name="+name;
+
+                    $http.get(url).then(allIsWell,notWell);
+
+                    function allIsWell(response)
+                    {
+                        //alert(JSON.stringify(response.data)) ;
+                        $scope.jsonArrayAll=response.data;
+
+                    }
+                    function notWell(err)
+                    {
+                        alert(err)
+                    }
+                }
+                ///////////////////////////////////////////////////////////////////////////////
+                $scope.doShowMoreinfo=function(index)
+                {
+                 
+                  $scope.jsonArrayMoreinfo =$scope.jsonArrayAll[index];
+                 // alert(index);
+                }
+                // ///////////////////////////////////////////////////////
+                $scope.doSendEmail=function(email)
+                {
+                //  alert(email);
+                  let cltemail=$scope.selemail;
+                  
+                  let url="/send-email-influencer?email="+email+"&cltemail="+cltemail;
+                  $http.get(url).then(allIsWell,notWell);
+
+                  function allIsWell(response)
+                    {
+                        //alert(JSON.stringify(response.data)) ;
+                        alert(response.data);
+
+                    }
+                    function notWell(err)
+                    {
+                        alert(err);
+                    }
+
+                }
+    })
+    </script>
+    <script>
+      $(document).ready(function()
+{
+     if(localStorage.getItem("activeuser")==null)
+     {
+       location.href="index.html";
+       return;
+     }
+       
+})
+   </script>
+   <script>
+   function doLogout()
+ {
+   localStorage.removeItem("activeuser");
+   location.href="index.html";
+ }
+   </script>
+   <style>
+    label{
+      color: purple;
+    }
+   </style>
+</head>
+<body ng-app="mymodule" ng-controller="mycontroller" style="background-color: #EAF7FD;">
+    
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <!------------------------------------------------------------------ ----->
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img src="pics/pngwing.com.png" alt="Logo" width="70" height="70" class="d-inline-block align-text-top">
+            
+          </a>
+        </div>
+      </nav>
+      <!-- --------------------------------------------------------------- -->
+      <a class="navbar-brand" href="index.html" id="nav-text">INFLUENCER</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+          <li class="nav-item" id="nav-margin">
+            <a class="nav-link active" aria-current="page" href="#"></a>
+          </li>
+          
+         
+          <li class="nav-item">
+            <nav class="navbar bg-body-tertiary">
+              <div class="container-fluid">
+               <a href="#ourteam"> <span class="navbar-brand mb-0 h1"></span></a>
+              </div>
+            </nav>
+          </li>
+          <!-- <li class="nav-item">
+            <nav class="navbar bg-body-tertiary">
+              <div class="container-fluid">
+                <input type="button" class="btn btn-primary" value="Logout" id="btnLogout" onclick="doLogout();">
+              </div>
+            </nav>
+          </li> -->
+        </ul>
+        <!-- ------------------------------------------------------------------ -->
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <input type="button" class="btn btn-primary" value="Logout" id="btnLogout" onclick="doLogout();">
+          </div>
+        </nav>
+        <!-- --------------------------------------------------------------------------- -->
+      </div>
+    </div>
+  </nav>
+  <!-- ------------------------------------------------------------- -->
+  <div class="container" >
+    <div class="row" >
+      <div style="color: #1071A2; font-size: 50px;  ">Find Influencers</div>
+    </div>
+  </div>
+    <!--Form-->
+     
+    <div class="row">
+    <div class="col-md-10" id="form">
+   <form>
+    <!-------------------------------------------------------------------------->
+    <!-- <div class="col-md-4">
+      <label  class="form-label" >Field</label>
+      <select class="form-select" ng-model="selfield" ng-change="doShowSel();" multiple>
+        <option value="none">Select</option>
+        <option value="Fashion">Fashion/lifestyle</option>
+        <option value="Travel">Travel</option>
+        <option value="Food">Food</option>
+        <option value="Beauty">Beauty</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Tech">Tech</option>
+        <option value="Edutech">Edutech</option>
+        <option value="Parenting">Parenting</option>
+        <option value="Finance">Finance</option>
+        <option value="Gaming">Gaming</option>
+      </select>
+    </div> -->
+    <!----------------------------------------------------------------------->
+    <!-- <div class="col-md-4">
+        <label for="inputCity" class="form-label">City</label>
+        <select class="form-select" ng-model="selCity" >
+
+          <option ng-repeat="obj in jsonArrayCity" value="{{obj.city}}" >{{obj.city}}</option>
+      </select>
+      </div> -->
+      <div class="row">
+        <div class="col-md-4">
+          <label  class="form-label" >Field</label>
+      <select class="form-select" ng-model="selfield" ng-change="doShowSel();" multiple>
+        <option value="none">Select</option>
+        <option value="Fashion">Fashion/lifestyle</option>
+        <option value="Travel">Travel</option>
+        <option value="Food">Food</option>
+        <option value="Beauty">Beauty</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Tech">Tech</option>
+        <option value="Edutech">Edutech</option>
+        <option value="Parenting">Parenting</option>
+        <option value="Finance">Finance</option>
+        <option value="Gaming">Gaming</option>
+      </select> 
+        </div>
+        <div class="col-md-4">
+          <label for="inputCity" class="form-label">City</label>
+        <select class="form-select" ng-model="selCity" >
+
+          <option ng-repeat="obj in jsonArrayCity" value="{{obj.city}}" >{{obj.city}}</option>
+      </select>
+        </div>
+      </div>
+    <!----------------------------------------------------------------------->
+ <center>  <button type="submit" class="btn btn-primary" id="buttons" ng-click="doShowSelAll();">Find</button> </center> 
+    <!---------------------------------------------------------------------->
+    <hr>
+  <center>  <div class="col-md-4">
+      <label  class="form-label">Name</label>
+      <input type="text" class="form-control" ng-model="name">
+    </div>
+      <!------------------------------------------------------------------------------>
+      <button type="submit" class="btn btn-primary" id="buttons" ng-click="doShowName();">Search By Name</button>
+      <hr>
+    </center>
+    <!------------------------------------------------------------------------------->
+    <div class="container">
+      <div class="row">
+          <div class="col-md-3" ng-repeat="obj in jsonArrayAll" style="background-color: #EAF7FD;">
+              <div class="card mt-5" style="background-color: #EAF7FD;">
+                <center>  <img src="uploads/{{obj.picpath}}" width="75%" height="75%" ;></center>
+                  <div class="card-body">
+                    <h5 class="card-title">{{obj.iname}}</h5>
+                    <h5 class="card-title">{{obj.gender}}</h5>
+                    
+                 <a href="https://www.instagram.com/{{obj.insta}}"> <center> <img src="pics/instagram.svg" alt="" width="30px" height="30px"> </center> </a> 
+                    <br>
+                 <center> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more-info-model" ng-click="doShowMoreinfo($index);">More-Info</button> </center>
+                  </div>
+                </div>
+          </div>
+      </div>
+  </div>
+    
+  </form> 
+</div>
+</div>
+
+<!--Linking Modal-->
+<div class="modal fade" id="more-info-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: purple;" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Influencer Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+          <form action="" method="post"></form>
+              
+              <!-- <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="txtPwd_login" id="txtPwd_login">
+              </div> -->
+              <div class="mb-3">
+                <img src="uploads/{{jsonArrayMoreinfo.picpath}}" alt="" width="50%" height="50%" style="border-radius: 50%;">
+                {{jsonArrayMoreinfo.other}}
+              </div>
+              <hr>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">FullName :</label>
+                {{jsonArrayMoreinfo.iname}}
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">DOB :</label>
+                {{jsonArrayMoreinfo.dob}}
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1"  class="form-label">Email :</label>
+                {{jsonArrayMoreinfo.email}}
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">City :</label>
+                {{jsonArrayMoreinfo.city}}
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contact :</label>
+                {{jsonArrayMoreinfo.contact}}
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Address :</label>
+                {{jsonArrayMoreinfo.address}}
+              </div>
+              <hr>
+              <div>
+                <a href="https://www.instagram.com/{{jsonArrayMoreinfo.insta}}"> <center> <img src="pics/instagram.svg" alt="" width="30px" height="30px"> </center> </a> 
+                
+              </div>
+              <div >
+                
+                <a href="https://www.youtube.com//{{jsonArrayMoreinfo.yt}}"> <center> <img src="pics/youtube.svg" alt="" width="30px" height="30px"> </center> </a> 
+              </div>
+              <hr>
+              <div>
+               <center> <input type="button" id="btnConnect" class="btn btn-outline-secondary" value="Connect" ng-click="doSendEmail(jsonArrayMoreinfo.email);"></center>
+              </div>
+              </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="new_footer_area bg_color" style="background-color:rgb(217, 217, 250); padding-bottom: 0px; bottom: 0;  width: 100%;;" >
+  <div class="new_footer_top">
+      <div class="container">
+          <div class="row" style="margin-top: 50px;">
+              <div class="col-lg-3 col-md-6">
+                  <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
+                      <h3 class="f-title f_600 t_color f_size_18">Get in Touch</h3>
+                      <p>Don’t miss any updates of our new Website</p>
+                      <form action="#" class="f_subscribe_two mailchimp" method="post" novalidate="true" _lpchecked="1">
+                          <input type="text" name="EMAIL" class="form-control memail" placeholder="Email">
+                          <button class="btn btn_get btn_get_two" type="submit">Subscribe</button>
+                          <p class="mchimp-errmessage" style="display: none;"></p>
+                          <p class="mchimp-sucmessage" style="display: none;"></p>
+                      </form>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
+                      <h3 class="f-title f_600 t_color f_size_18">Download</h3>
+                      <ul class="list-unstyled f_list">
+                          <li><a href="#">Company</a></li>
+                          <!-- <li><a href="#">Android App</a></li>
+                          <li><a href="#">ios App</a></li>
+                          <li><a href="#">Desktop</a></li>
+                          <li><a href="#">Projects</a></li>
+                          <li><a href="#">My tasks</a></li> -->
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;">
+                      <h3 class="f-title f_600 t_color f_size_18">Help</h3>
+                      <ul class="list-unstyled f_list">
+                          <!-- <li><a href="#">FAQ</a></li> -->
+                          <li><a href="#">Term &amp; conditions</a></li>
+                          <!-- <li><a href="#">Reporting</a></li>
+                          <li><a href="#">Documentation</a></li>
+                          <li><a href="#">Support Policy</a></li> -->
+                          <li><a href="#">Privacy</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
+                      <h3 class="f-title f_600 t_color f_size_18">Team Solutions</h3>
+                      <div class="f_social_icon">
+                          <a href="https://www.facebook.com/">
+                            <img src="pics/facebook.svg" alt="">
+                          </a>
+                          <a href="https://www.instagram.com/">
+                            <img src="pics/instagram.svg" alt="">
+                          </a>
+                          <a href="https://www.youtube.com/">
+                            <img src="pics/youtube.svg" alt="">
+                          </a>                    
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer_bg">
+          <div class="footer_bg_one"></div>
+          <div class="footer_bg_two"></div>
+      </div>
+  </div>
+  <div class="footer_bottom">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-lg-6 col-sm-7">
+                  <p class="mb-0 f_400">INFLUENCER 2019 All rights reserved.</p>
+              </div>
+              <div class="col-lg-6 col-sm-5 text-right">
+                  <p>Made with <i class="icon_heart"></i> in <a href="http://cakecounter.com" target="_blank">CakeCounter</a></p>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+<!--Linking it to script.js-->
+<script src="script.js"></script>
+</body>
+</html>
