@@ -38,6 +38,12 @@ app.use(fileuploader());
      else
      console.log(err.message+"  ########");
  })
+ ///////////////////////////////////////////////////
+ const pool = await mysql.createPool({
+    // configuration options
+  });
+  await pool.execute('...your query...');
+  await pool.end();
 /////////////////////////////////////////////////////////////////////
 var transporter = nodemailer.createTransport({
     service: 'gmail',
