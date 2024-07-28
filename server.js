@@ -3,6 +3,7 @@ var fileuploader=require("express-fileupload");
 let app=express();
 var mysql2=require("mysql2");
 var nodemailer = require('nodemailer');  
+var cloudinary = require('cloudinary').v2;
 
 app.listen(2009,function()
 {
@@ -20,15 +21,23 @@ app.use(fileuploader());
 //      dateStrings:true
 //  }
 
- let config = {
-    host :"bhr4ar2xmpslzteabz3m-mysql.services.clever-cloud.com",
-    user:"u7ouu0c8owsx2cvm",
-    password:"QugWXO7oqik1TrIKDY9I",
-    database:"bhr4ar2xmpslzteabz3m",
-    dateStrings:true,
-    keepAliveInitialDelay : 10000,
-    enableKeepAlive : true,
-}
+//  let config = {
+//     host :"bhr4ar2xmpslzteabz3m-mysql.services.clever-cloud.com",
+//     user:"u7ouu0c8owsx2cvm",
+//     password:"QugWXO7oqik1TrIKDY9I",
+//     database:"bhr4ar2xmpslzteabz3m",
+//     dateStrings:true,
+//     keepAliveInitialDelay : 10000,
+//     enableKeepAlive : true,
+// }
+
+cloudinary.config({ 
+    cloud_name: 'deyyjtqmb', 
+    api_key: '258419894551616', 
+    api_secret: '-oFJNgEUaxkg-mVZNnRER4JV1Ew' // Click 'View Credentials' below to copy your API secret
+});
+
+let config = "mysql://avnadmin:AVNS_vB1gMDCcs5mROiGfu0B@mysql-d7eb1d8-singlavanshpc-6103.g.aivencloud.com:26369/defaultdb"
 
  var mysql = mysql2.createConnection(config);
  mysql.connect(function(err)
@@ -93,7 +102,7 @@ app.get("/check-login-details",function(req,resp)
 })
 ///////////////////////////////////////////////////
 // Influencer profile details
-app.post("/iprofile-save-details",function(req,resp)
+app.post("/iprofile-save-details",async function(req,resp)
 {
     let fileName="";
     if(req.files!=null)
@@ -101,6 +110,14 @@ app.post("/iprofile-save-details",function(req,resp)
             fileName=req.files.ppic.name;
             let path=__dirname+"/public/uploads/"+fileName;
             req.files.ppic.mv(path);
+
+            await cloudinary.uploader.upload(path)
+            .then(function(result){
+
+                fileName = result.url;
+
+            })
+
         }
         else
         fileName="nopic.jpg";

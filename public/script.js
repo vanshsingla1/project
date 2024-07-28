@@ -87,8 +87,9 @@ $("#btnEmail_infl").click(function(){
         }
        // alert(JSON.stringify(jsonAry));
         $("#txtPwd").val(jsonAry[0].pwd);//table colu. wala
-        $("#txtDob").val(jsonAry[0].dob);//table colu. wala
-        $("#prev").prop("src","uploads/"+jsonAry[0].picpath);
+        $("#txtDob").val(jsonAry[0].dob.split("T")[0]);//table colu. wala
+        // alert(jsonAry[0].dob);
+        $("#prev").prop("src",jsonAry[0].picpath);
         $("#prev").val(jsonAry[0].picpath);
         $("#txtName").val(jsonAry[0].iname);
         $("#txtGender").val(jsonAry[0].gender);
