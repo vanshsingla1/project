@@ -265,7 +265,7 @@
       <div class="row">
           <div class="col-md-3" ng-repeat="obj in jsonArrayAll" style="background-color: #EAF7FD;">
               <div class="card mt-5" style="background-color: #EAF7FD;">
-                <center>  <img src="uploads/{{obj.picpath}}" width="75%" height="75%" ;></center>
+                <center>  <img src="{{obj.picpath}}" width="75%" height="75%" ;></center>
                   <div class="card-body">
                     <h5 class="card-title">{{obj.iname}}</h5>
                     <h5 class="card-title">{{obj.gender}}</h5>
@@ -299,7 +299,7 @@
                 <input type="password" class="form-control" name="txtPwd_login" id="txtPwd_login">
               </div> -->
               <div class="mb-3">
-                <img src="uploads/{{jsonArrayMoreinfo.picpath}}" alt="" width="50%" height="50%" style="border-radius: 50%;">
+                <img src="{{jsonArrayMoreinfo.picpath}}" alt="" width="50%" height="50%" style="border-radius: 50%;">
                 {{jsonArrayMoreinfo.other}}
               </div>
               <hr>
@@ -349,7 +349,7 @@
 <footer class="new_footer_area bg_color" style="background-color:rgb(217, 217, 250); padding-bottom: 0px; bottom: 0;  width: 100%;;" >
   <div class="new_footer_top">
       <div class="container">
-          <div class="row">
+          <div class="row" style="margin-top: 40px;">
               <div class="col-lg-3 col-md-6">
                   <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
                       <h3 class="f-title f_600 t_color f_size_18">Get in Touch</h3>

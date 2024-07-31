@@ -96,7 +96,7 @@ $("#btnEmail_infl").click(function(){
         $("#txtAdd").val(jsonAry[0].address);
         $("#txtCity").val(jsonAry[0].city);
         $("#txtContact").val(jsonAry[0].contact);
-        $("#txtField").val(jsonAry[0].field.split(","));
+        $("#txtField").val(jsonAry[0].field.split(","));    
         $("#txtInsta").val(jsonAry[0].insta);
         $("#txtYt").val(jsonAry[0].yt);
         $("#txtOther").val(jsonAry[0].other);
