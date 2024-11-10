@@ -536,7 +536,7 @@ app.get("/send-email-influencer",function(req,resp){
       if(err!=null){
         resp.send(err.message);
       } else {
-        resp.send("Email Send Successfully...");
+        resp.send("Email Send ,Pls Check...");
       }
     });
     
