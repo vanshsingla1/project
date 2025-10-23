@@ -13,13 +13,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded("true"));
 app.use(fileuploader());
 
-//  let config = {
-//      host :"127.0.0.1",
-//      user:"root",
-//      password:"Vansh@123#",
-//      database:"june2024",
-//      dateStrings:true
-//  }
+ let config = {
+     host :"127.0.0.1",
+     user:"root",
+     password:"Vansh@123#",
+     database:"june2024",
+     dateStrings:true
+ }
 
 //  let config = {
 //     host :"bhr4ar2xmpslzteabz3m-mysql.services.clever-cloud.com",
@@ -31,13 +31,13 @@ app.use(fileuploader());
 //     enableKeepAlive : true,
 // }
 
-cloudinary.config({ 
-    cloud_name: 'deyyjtqmb', 
-    api_key: '258419894551616', 
-    api_secret: '-oFJNgEUaxkg-mVZNnRER4JV1Ew' // Click 'View Credentials' below to copy your API secret
-});
+// cloudinary.config({ 
+//     cloud_name: 'deyyjtqmb', 
+//     api_key: '258419894551616', 
+//     api_secret: '-oFJNgEUaxkg-mVZNnRER4JV1Ew' // Click 'View Credentials' below to copy your API secret
+// });
 
-let config = "mysql://avnadmin:AVNS_vB1gMDCcs5mROiGfu0B@mysql-d7eb1d8-singlavanshpc-6103.g.aivencloud.com:26369/defaultdb"
+// let config = "mysql://avnadmin:AVNS_vB1gMDCcs5mROiGfu0B@mysql-d7eb1d8-singlavanshpc-6103.g.aivencloud.com:26369/defaultdb"
 
  var mysql = mysql2.createConnection(config);
  mysql.connect(function(err)
@@ -109,26 +109,26 @@ app.post("/iprofile-save-details",async function(req,resp)
         {
             fileName=req.files.ppic.name;
             let path=__dirname+"/public/uploads/"+fileName;
-           // req.files.ppic.mv(path);
+            req.files.ppic.mv(path);
 
-            await cloudinary.uploader.upload(path)
-            .then(function(result){
+            // await cloudinary.uploader.upload(path)
+            // .then(function(result){
 
-                fileName = result.url;
+            //     fileName = result.url;
 
-            })
+            // })
 
         }
         else
         {
             fileName="nopic.jpg";
             let path=__dirname+"/public/uploads/"+fileName;
-            await cloudinary.uploader.upload(path)
-            .then(function(result){
+            // await cloudinary.uploader.upload(path)
+            // .then(function(result){
 
-                fileName = result.url;
+            //     fileName = result.url;
 
-            })
+            // })
         }
         
    
@@ -232,7 +232,7 @@ app.get("/update-login-details-settings",function(req,resp)
      let txtoldPwd = req.query.txtoldPwd;
      let txtnewPwd = req.query.txtnewPwd;
      let txtrepPwd = req.query.txtrepPwd;
-     if(txtnewPwd===txtrepPwd)
+     if(txtnewPwd === txtrepPwd)
      {
          mysql.query("update users set pwd=? where email=? and pwd=?",[txtnewPwd,txtEmail,txtoldPwd],function(err,result)
          {
