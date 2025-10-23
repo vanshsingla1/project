@@ -34,6 +34,12 @@
                     function allIsWell(response)
                     {
                         //alert(JSON.stringify(response.data)) ;
+                        response.data.forEach(obj => {
+  if (!obj.picpath) {
+    obj.picpath = "pics/happy-father-s-day-cookies-father-s-day-isolated-white-background.png";
+  }
+});
+
                         $scope.jsonArrayCity=response.data;
 
                     }
@@ -54,8 +60,14 @@
                     function allIsWell(response)
                     {
                         //alert(JSON.stringify(response.data)) ;
-                        $scope.jsonArrayAll=response.data;
+                        response.data.forEach(obj => {
+  if (!obj.picpath) {
+    obj.picpath = "/pics/happy-father-s-day-cookies-father-s-day-isolated-white-background.png";
+  }
+});
 
+                        $scope.jsonArrayAll=response.data;
+                        
                     }
                     function notWell(err)
                     {
@@ -74,8 +86,13 @@
                     function allIsWell(response)
                     {
                         //alert(JSON.stringify(response.data)) ;
-                        $scope.jsonArrayAll=response.data;
+                        response.data.forEach(obj => {
+  if (!obj.picpath) {
+    obj.picpath = "public/pics/happy-father-s-day-cookies-father-s-day-isolated-white-background.png";
+  }
+});
 
+                        $scope.jsonArrayAll=response.data;
                     }
                     function notWell(err)
                     {

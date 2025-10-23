@@ -36,12 +36,12 @@
       }
      
   </script>
-  <script>
+  <!-- <script>
     $(document).ready(function()
   {
              
              let active=localStorage.getItem("activeuser");
-            $("#txtEmail").val(active).prop("readonly",true);
+            $("#txtEmail").val(active).prop("readonly",true); 
 ///////////////////////////////////////////////////////////////
     $(document).ajaxStart(function(){
                 $("#bg").css("display","block");
@@ -52,7 +52,14 @@
                 $("#bg").css("display","none");
             })
   })
-  </script>
+  </script> -->
+  <script>
+    $(window).on('load', function () {
+        let active = localStorage.getItem("activeuser");
+        $("#txtEmail").val(active).prop("readonly", true);
+    });
+    </script>
+    
    <style>
     a{
       text-decoration: none;
